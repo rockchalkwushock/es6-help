@@ -1,0 +1,23 @@
+{
+  "name": "es6-help",
+  "version": "1.0.0",
+  "description": "Helping a student with Webpack + babel + es6",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rockchalkwushock/es6-help.git"
+  },
+  "keywords": [
+    "webpack",
+    "babel"
+  ],
+  "author": "Cody Brunner <rockchalkwushock@icloud.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rockchalkwushock/es6-help/issues"
+  },
+  "homepage": "https://github.com/rockchalkwushock/es6-help#readme"
+}
