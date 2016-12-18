@@ -4,13 +4,13 @@ Helping a student with Webpack + babel + ES6
 ## Package.json
 This is the heart and soul of your project. All npm packages will be added here.
 The npm packages generate a directory called `node_modules` where they are stored.
-This should not be pushed up to GitHub (GH) and can be "ignored" using a `.gitignore`. This can be generated for specific environments via GH - new repository or simply created in your text editor or via the Command Line Interface (CLI) with the following command: `touch .gitignore`.
+This should not be pushed up to GitHub (GH) and can be "ignored" using a `.gitignore`. This can be generated for specific environments via GH - *new repository*, created in your text editor, or via the Command Line Interface (CLI) with the following command: `touch .gitignore`.
 
 For more in-depth reading:[NPM-Package.json](https://docs.npmjs.com/getting-started/using-a-package.json)
 
 ### Scripts:
 NPM scripts run commands that execute code in your project. The two you will most likely see in projects and use yourself are `npm start` & `npm test`. These are specific to many third party technologies such as Heroku (by default looks for `npm start` to run your project) & Travis CI (by default looks for `npm test` to test your build).
-You should avoid these two scripts being automated with packages like `nodemon` & `supervisor` and instead create separate scripts such as `npm run test:watch`. An important note is that `npm` does not require the `run` keyword for `npm start`, `npm test`, `npm stop`, & `npm restart`; however, it does require `run` for all other scripts, therefore `npm run test:watch`.
+You should avoid these two scripts being automated with packages like `nodemon` & `supervisor` and instead create separate scripts such as `npm run test:watch`. An important note is that `npm` does not require the `run` keyword for `npm start`, `npm test`, `npm stop`, & `npm restart`; however, it does require `run` for all developer created scripts, therefore `npm run test:watch` works but `npm test:watch` does not.
 
 For more in-depth reading: [NPM-Scripts](https://docs.npmjs.com/misc/scripts)
 
@@ -77,7 +77,10 @@ The following example is from a `package.json` that hosts a project built with w
 
 ## Webpack
 For more in-depth reading:[Webpack](https://webpack.js.org)
-NOTE: Webpack 2 is comming soon so this information will not be valid long.
+
+**NOTE**:Webpack 2 is comming soon so this information will not be valid long.
+
+
 For more reading on the `webpack` package: [Webpack Package](https://www.npmjs.com/package/webpack)
 
 All though you can bundle your server you will likely only ever bundle your client side code.
@@ -139,11 +142,11 @@ With the setup from Thinkful webpack is going to look at your package.json to na
 Now for the important part! `"main":` is the entry point for your build to start. Whatever executes your client side code should be here. In most cases this is a file called `client.js` or perhaps `client/index.js`.
 
 ### Webpack + Babel
-For more on Babel: For more in-depth reading:
-[Babel](https://babeljs.io)
-[Babel-GH](https://github.com/babel/babel)
+For more on Babel: [Babel](https://babeljs.io)
 
-So first off Babel is a transpiler for changing ES6 syntax to ES5. This is done because the browsers are not all running exclusively on ES6 yet so send it ES6 code and Chrome or any other browser will not render what you want at all because it has no idea what you sent it!
+For more in-depth reading: [Babel-GH](https://github.com/babel/babel)
+
+So first off Babel is a transpiler for changing ES6 syntax to ES5. This is done because the browsers are not all running exclusively on ES6 yet so send it ES6 code and Chrome or any other browser will not render what you want at all because it has no idea what you sent it! Not all JavaScript is equal apparently!
 
 Therefore if you are using ES6 you need Babel.
 But you are using webpack?
@@ -151,22 +154,55 @@ How do you bundle and transpile and other big fancy 50 cent words???
 
 Enter the loaders!
 
-Above in the example there is a module with a key called `loaders`. You can have multiple loaders but for sake of simplicity we will assume you only need one. The loaders are going to look at the code as it is being bundled transpile it to ES5 (I am probably very under discussing this point! Go read docs for more info!!!).
-This loader is specifically only looking for files ending in `.js`. You can set this for css files, jsx, you name it! (again read docs probably not everything).
-Our loader is `babel` so at this point the babel-loader package will fire up and do it's thing. The last part `query` is telling the loader what to look for as presets. There are many many presets. If you add any to your project they need to be added to this section as well as your `.bablerc` or `"babel":` object in the package.json.
+Above in the example there is a module with a key called `loaders`. You can have multiple loaders but for sake of simplicity we will assume your project only requires one. The loaders are going to look at the code as it is being bundled transpile it to ES5 (I am probably very over simplifying this point! Go read docs for more info!!!).
+This loader is specifically only looking for files ending in `.js`. You can set this for css files, jsx, you name it! (again read docs probably not just anything you can name).
+Our loader is `babel` so at this point the babel-loader package will fire up and do it's thing. The last part `query` is telling the loader what to look for the listed presets. There are many many presets. If you add any to your project they need to be added to this section as well as your `.bablerc` (or `"babel":` object in the package.json).
 
 In the example we are using `es2015` or our code is written in ES6 so query for ES6 syntax. Later in the Thinkful React Course you will use `react` & `stage-0`, but as I said there are many more.
+
+### Babel Configuration
+
+When using *babel-presets* you will need to either create a `.babelrc` or you can create a `"babel"` object in your package.json:
+
+#### .babelrc
+
+```
+{
+  "presets": [
+    "es2015"
+  ]
+  // NOTE: plugins & extensions go in here too!
+}
+```
+
+#### "babel" object in package.json
+
+```
+"babel": {
+    "presets": [
+      "es2015",
+      "react",
+      "stage-0"
+    ]
+    // NOTE: plugins & extensions go in here too!
+  },
+```
 
 
 ## ES6
 You want to know the sweetness of ES6?
+
 Check out the following!
+
 [ES6-Official](http://es6-features.org/#Constants)
+
 [ES6-GH](http://es6-features.org/#Constants)
+
 [thenewboston-ES6-Basics](https://www.youtube.com/watch?v=ZJZfIw3P8No&list=PL6gx4Cwl9DGBhgcpA8eTYYWg7im72LgLt)
+
 [Stephen Grider ES6 Course on Udemy](https://www.udemy.com/javascript-es6-tutorial/)
 
 
 ## Conclusion
 
-I just put this together in like 45 minutes so if there are spelling mistakes forgive me and I'm positive there is over simplification that is why links to these technologies are present. Don't take my word for anything and definitely do not believe this is the word of God on anything. Tech changes all the time and we must strive to keep up with it! That being said feel free to PR this repo and open issues!
+I just put this together in like 45 minutes so if there are spelling mistakes forgive me and I'm positive there is over simplification abound! That is why links to these technologies are present. Don't take my word for anything and definitely do not believe this is the word of God on anything. Tech changes all the time and we must strive to keep up with it! That being said feel free to PR this repo and open issues as you find errors, better practices, or want to add better descriptions of the tech and how to use/integrate it!
