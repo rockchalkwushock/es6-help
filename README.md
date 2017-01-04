@@ -16,7 +16,7 @@ For more in-depth reading: [NPM-Scripts](https://docs.npmjs.com/misc/scripts)
 
 Example:
 
-```
+```json
 "scripts": {
   "test": "mocha --compilers js:babel-register test/**/*.js*",
   "test:watch": "nodemon --exec '_mocha --reporter min --compilers js:babel-register test/**/*.js*'",
@@ -40,7 +40,7 @@ Basically what you can ask yourself is "Does my project need this to run when `n
 
 The following example is from a `package.json` that hosts a project built with webpack on Heroku. Notice nearly all babel packages and webpack are in the DEPENDENCIES of the project because they will be needed to compile ES6 syntax to ES5 through webpack.
 
-```
+```json
 "dependencies": {
   "babel-cli": "^6.18.0",
   "babel-core": "^6.18.2",
@@ -92,10 +92,12 @@ The main purpose is to bundle JavaScript (JS) files for usage in a browser, yet 
 Obviously the first thing you will need to do is create a file in the root directory of your project normally these files are named `webpack.config.js`. You will likely see projects on GH that have `production`, `development`, etc versions of this file I will let you take the plunge on creating multiple configs for different environments.
 
 So first steps:
-`touch webpack.config.js`
-`npm install --save-dev webpack`
-Next go into your package.json and create the following scripts (for simplicity this example is not taking into account minification or any css pre/post processors are present in the project):
+```bash
+touch webpack.config.js
+npm install --save-dev webpack
 ```
+Next go into your package.json and create the following scripts (for simplicity this example is not taking into account minification or any css pre/post processors are present in the project):
+```json
 "mkdir": "mkdir -p build",
 "build": "npm run clean && npm run mkdir && npm run build:html && npm run build:js",
 "clean": "rm -rf build",
@@ -106,7 +108,7 @@ Next go into your package.json and create the following scripts (for simplicity 
 ```
 
 
-```
+```javascript
 var path = require('path');
 
 var webpack = require('webpack');
@@ -166,28 +168,27 @@ When using *babel-presets* you will need to either create a `.babelrc` or you ca
 
 #### .babelrc
 
-```
+```json
 {
   "presets": [
     "es2015"
   ]
-  // NOTE: plugins & extensions go in here too!
 }
 ```
+**NOTE: plugins & extensions go in here too!**
 
 #### "babel" object in package.json
 
-```
+```json
 "babel": {
     "presets": [
       "es2015",
       "react",
       "stage-0"
     ]
-    // NOTE: plugins & extensions go in here too!
   },
 ```
-
+**NOTE: plugins & extensions go in here too!**
 
 ## ES6
 You want to know the sweetness of ES6?
